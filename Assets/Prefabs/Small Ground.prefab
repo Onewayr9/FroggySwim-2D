@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4737215828608338}
   - component: {fileID: 212934523820226856}
-  - component: {fileID: 61842857994731120}
   - component: {fileID: 251486017012339470}
+  - component: {fileID: 68557206518268422}
   m_Layer: 0
   m_Name: Small Ground
   m_TagString: Ground
@@ -42,8 +42,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61842857994731120
-BoxCollider2D:
+--- !u!68 &68557206518268422
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -54,8 +54,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 7, y: 0.51}
+  m_Points:
+  - {x: -3.5, y: 0}
+  - {x: 3.5, y: 0}
 --- !u!212 &212934523820226856
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -105,7 +106,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_SurfaceArc: 0
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1

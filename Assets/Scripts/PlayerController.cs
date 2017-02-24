@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour {
 		HPText.text = "HP: " + HP;
 	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
-		if (!GameManager.instance.isGround && collision.collider.tag == "Ground") {
+	void OnCollisionStay2D(Collision2D collision) {
+		if (!GameManager.instance.isGround && collision.collider.tag == "Ground" && rb2d.velocity.y == 0) {
 			GameManager.instance.isGround = true;
 		}
 	}
