@@ -133,6 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shell: {fileID: 1342066357288168, guid: 5ebc491e77e564d50be3e8de18bd4c05, type: 2}
   shellSpawn: {fileID: 4436533602159122}
+  startWait: 3
+  spawnWait: 3
 --- !u!212 &212963996008200032
 SpriteRenderer:
   m_ObjectHideFlags: 1
