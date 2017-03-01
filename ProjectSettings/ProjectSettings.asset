@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 10
   productGUID: 76423336d77d545f7977dea7c7f126ee
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 3
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -118,7 +118,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.Company.ProductName
+  bundleIdentifier: com.Oneway.FroggyTest
   bundleVersion: 1.0
   preloadedAssets: []
   metroInputSource: 0
@@ -144,7 +144,7 @@ PlayerSettings:
     serializedVersion: 2
     m_Bits: 238
   iPhoneSdkVersion: 988
-  iOSTargetOSVersionString: 
+  iOSTargetOSVersionString: 7.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 

@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - Enemy
   - NextLevel
+  - Death
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: first
+    uniqueID: 3468250129
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

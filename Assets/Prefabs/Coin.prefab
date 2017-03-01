@@ -9,44 +9,44 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1860406724385406}
+  m_RootGameObject: {fileID: 1987139575856188}
   m_IsPrefabParent: 1
---- !u!1 &1860406724385406
+--- !u!1 &1987139575856188
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4443687920113996}
-  - component: {fileID: 212966091103620618}
-  - component: {fileID: 61932003562843418}
+  - component: {fileID: 4304696191999454}
+  - component: {fileID: 212746033597694216}
+  - component: {fileID: 61007745075586626}
   m_Layer: 0
-  m_Name: Obstacle
-  m_TagString: Obstacle
+  m_Name: Coin
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4443687920113996
+--- !u!4 &4304696191999454
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1860406724385406}
+  m_GameObject: {fileID: 1987139575856188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: 2.64, y: -2.74, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.3170534}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61932003562843418
+--- !u!61 &61007745075586626
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1860406724385406}
+  m_GameObject: {fileID: 1987139575856188}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -54,13 +54,13 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 3}
---- !u!212 &212966091103620618
+  m_Size: {x: 8, y: 8}
+--- !u!212 &212746033597694216
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1860406724385406}
+  m_GameObject: {fileID: 1987139575856188}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ee69aea6f8d9c4f9a9d52808644b59d8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5613f071d4ee14fae8d3ebeba75a15ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

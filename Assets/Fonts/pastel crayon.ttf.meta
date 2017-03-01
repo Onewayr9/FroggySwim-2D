@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 6045451b9ac404d1d85ca38a3226ffcf
+timeCreated: 1488349327
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: pastel
+  fontNames:
+  - pastel
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
