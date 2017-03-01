@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 	public float restartLevelDelay = 1f;
+	public Text LevelText;
 	public Text ScoreText;
 	public Text HPText;
 
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
+		LevelText.text = "Level " + (GameManager.instance.level + 1);
 		ScoreText.text = "Score: " + GameManager.instance.score;
 		HPText.text = "HP: " + HP;
 	}
@@ -37,6 +39,10 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.SetActive (false);
 		} else if (other.tag == "Obstacle") {
 			HP -= 30;
+			other.gameObject.SetActive (false);
+			CheckIfGameOver ();
+		} else if (other.tag == "Death") {
+			HP = 0;
 			CheckIfGameOver ();
 		}
 		ScoreText.text = "Score: " + GameManager.instance.score;
@@ -45,7 +51,14 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameManager.instance.isGround && Input.GetKeyDown ("space")) {
+		bool isJump = false;
+	#if UNITY_STANDALONE || UNITY_WEBPLAYER
+		isJump = Input.GetKeyDown ("space");
+	#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+		isJump = (Input.touchCount > 0);
+	#endif
+
+		if (GameManager.instance.isGround && isJump) {
 			rb2d.AddForce (new Vector2 (0, 1400));
 			GameManager.instance.isGround = false;
 		}
@@ -64,6 +77,7 @@ public class PlayerController : MonoBehaviour {
 		//Check if food point total is less than or equal to zero.
 		if (HP <= 0) 
 		{
+			LevelText.text = "Game Over";
 			//Call the GameOver function of GameManager.
 			GameManager.instance.GameOver ();
 		}

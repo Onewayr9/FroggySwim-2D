@@ -52,8 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f9be352d4354f4f9d42f8d02d8e27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelStartDelay: 2
   score: 0
   isGround: 1
+  level: 0
 --- !u!114 &114129377886021614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,5 +68,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 1304226065558072, guid: 07f484681c32e4e02ac7d15da19e8337, type: 2}
-  - {fileID: 1304226065558072, guid: 07f484681c32e4e02ac7d15da19e8337, type: 2}
+  - {fileID: 1109964824232072, guid: 07f484681c32e4e02ac7d15da19e8337, type: 2}
+  - {fileID: 1109964824232072, guid: 07f484681c32e4e02ac7d15da19e8337, type: 2}

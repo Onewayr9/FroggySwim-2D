@@ -7,14 +7,17 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
+	public float levelStartDelay = 2f;
 
 	public int score = 0;
 
 	[HideInInspector] public bool isGround = true;
+	[HideInInspector] public int level = 0;
 
-	private BoardManager boardScript;
-	private int level = 0;
 	private Text levelText;
+	private GameObject playerObject;
+	private GameObject levelImage;
+	private BoardManager boardScript;
 
 	void Awake () {
 		if (instance == null) {
@@ -39,13 +42,38 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void InitGame() {
-		levelText = GameObject.Find ("Level").GetComponent<Text> ();
+		playerObject = GameObject.Find ("Player");
+		playerObject.SetActive (false);
+
+		levelImage = GameObject.Find("LevelImage");
+		levelText = GameObject.Find("LevelText").GetComponent<Text>();
 		levelText.text = "Level " + (level + 1);
-		boardScript.SetupScene (level);
+		//levelImage.SetActive(true);
+		//Invoke("HideLevelImage", levelStartDelay);
+		StartCoroutine(goAfterDelay());
+		//HideLevelImage ();
+
+		//boardScript.SetupScene (level);
+	}
+
+	//Hides black image used between levels
+	void HideLevelImage()
+	{
+		//Disable the levelImage gameObject.
+		levelImage.SetActive(false);
 	}
 
 	public void GameOver() {
 		levelText.text = "Game Over";
+		levelImage.SetActive (true);
 		enabled = false;
+	}
+
+	IEnumerator goAfterDelay() {
+		levelImage.SetActive (true);
+		yield return new WaitForSecondsRealtime(levelStartDelay);
+		levelImage.SetActive (false);
+		boardScript.SetupScene (level);
+		playerObject.SetActive (true);
 	}
 }

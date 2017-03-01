@@ -106,6 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29da1a80bd57f4cd89fb2cd33a45b838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restartLevelDelay: 1
+  LevelText: {fileID: 0}
+  ScoreText: {fileID: 0}
+  HPText: {fileID: 0}
 --- !u!212 &212268616245463688
 SpriteRenderer:
   m_ObjectHideFlags: 1
