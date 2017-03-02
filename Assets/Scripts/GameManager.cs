@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector] public bool isGround = true;
 	[HideInInspector] public int level = 0;
 
+	private bool restart = false;
+	private GameObject resumeButton;
 	private Text levelText;
 	private GameObject playerObject;
 	private GameObject levelImage;
@@ -35,8 +37,12 @@ public class GameManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int index)
 	{
-		//Add one to our level number.
-		level++;
+		if (restart) {
+			restart = false;
+			level = 0;
+			score = 0;
+		} else
+			level++;
 		//Call InitGame to initialize our level.
 		InitGame();
 	}
@@ -45,15 +51,13 @@ public class GameManager : MonoBehaviour {
 		playerObject = GameObject.Find ("Player");
 		playerObject.SetActive (false);
 
+		resumeButton = GameObject.Find ("RestartButton");
+		resumeButton.SetActive (false);
+
 		levelImage = GameObject.Find("LevelImage");
 		levelText = GameObject.Find("LevelText").GetComponent<Text>();
 		levelText.text = "Level " + (level + 1);
-		//levelImage.SetActive(true);
-		//Invoke("HideLevelImage", levelStartDelay);
 		StartCoroutine(goAfterDelay());
-		//HideLevelImage ();
-
-		//boardScript.SetupScene (level);
 	}
 
 	//Hides black image used between levels
@@ -66,7 +70,13 @@ public class GameManager : MonoBehaviour {
 	public void GameOver() {
 		levelText.text = "Game Over";
 		levelImage.SetActive (true);
+		resumeButton.SetActive (true);
 		enabled = false;
+		restart = true;
+	}
+
+	public void RestartGame() {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
 	}
 
 	IEnumerator goAfterDelay() {
