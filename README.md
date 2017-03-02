@@ -2,6 +2,7 @@
 ## TODOs:
 * add resume function when game over
 * add start game button when entering game
+* make the game screen-adjustable
 * upgrade HP system
 * add boss at the end of each level
 * upgrade pickups
