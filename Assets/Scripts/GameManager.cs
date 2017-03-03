@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector] public bool isGround = true;
 	[HideInInspector] public int level = 0;
 
-	private bool restart = false;
+	private bool restart = true;
 	private GameObject resumeButton;
 	private Text levelText;
 	private GameObject playerObject;
@@ -31,8 +31,6 @@ public class GameManager : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 
 		boardScript = GetComponent<BoardManager> ();
-
-		InitGame ();
 	}
 
 	void OnLevelWasLoaded(int index)
@@ -41,8 +39,9 @@ public class GameManager : MonoBehaviour {
 			restart = false;
 			level = 0;
 			score = 0;
-		} else
+		} else {
 			level++;
+		}
 		//Call InitGame to initialize our level.
 		InitGame();
 	}
