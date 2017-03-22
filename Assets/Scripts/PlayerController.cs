@@ -9,9 +9,15 @@ public class PlayerController : MonoBehaviour {
 	public Text LevelText;
 	public Text ScoreText;
 	public Text HPText;
+	//
+	public GameObject shield;
+	private GameObject this_shield = null;
+	//
 
 	private Rigidbody2D rb2d;
 	private int HP = 100;
+	//
+	private int pickUpCount = 0;
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -37,12 +43,43 @@ public class PlayerController : MonoBehaviour {
 			GameManager.instance.score += 10;
 			HP += 10;
 			other.gameObject.SetActive (false);
+			//
+			pickUpCount++;
+			Debug.Log ("player pick up");
+			if (pickUpCount >= 3) {
+				Debug.Log("Shield being produced");
+				this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+
+				pickUpCount = 0;
+			}
 		} else if (other.tag == "Obstacle") {
-			HP -= 30;
+			Debug.Log ("player obstacle");
+			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
+				Debug.Log ("Shield being deactive");
+				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
+			} else {
+				HP -= 30;
+			}
+			pickUpCount = 0;
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
 		} else if (other.tag == "Death") {
 			HP = 0;
+			CheckIfGameOver ();
+		} else if (other.tag == "Cactus") {
+			Debug.Log ("Cactus");
+			HP -= 60;
+			other.gameObject.SetActive (false);
+			CheckIfGameOver ();
+		} else if (other.tag == "MovingWall") {
+			Debug.Log ("Moving Wall");
+			HP -= 10;
+			other.gameObject.SetActive (false);
+			CheckIfGameOver ();
+		} else if (other.tag == "Shell") {
+			HP = 0;
+			Debug.Log ("Shell");
+			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
 		}
 		ScoreText.text = "Score: " + GameManager.instance.score;
@@ -82,4 +119,5 @@ public class PlayerController : MonoBehaviour {
 			GameManager.instance.GameOver ();
 		}
 	}
+		
 }

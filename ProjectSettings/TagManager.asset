@@ -10,6 +10,10 @@ TagManager:
   - Enemy
   - NextLevel
   - Death
+  - Cactus
+  - MovingWall
+  - Shell
+  - Shield
   layers:
   - Default
   - TransparentFX

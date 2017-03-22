@@ -44,16 +44,18 @@ public class GameManager : MonoBehaviour {
 	void InitGame() {
 		playerObject = GameObject.Find ("Player");
 		playerObject.SetActive (false);
-
+////
 		levelImage = GameObject.Find("LevelImage");
 		levelText = GameObject.Find("LevelText").GetComponent<Text>();
 		levelText.text = "Level " + (level + 1);
-		//levelImage.SetActive(true);
-		//Invoke("HideLevelImage", levelStartDelay);
 		StartCoroutine(goAfterDelay());
-		//HideLevelImage ();
 
-		//boardScript.SetupScene (level);
+
+//		levelImage.SetActive(true);
+//		Invoke("HideLevelImage", levelStartDelay);
+//		HideLevelImage ();
+//		boardScript.SetupScene (level);
+//		playerObject.SetActive (true);
 	}
 
 	//Hides black image used between levels
