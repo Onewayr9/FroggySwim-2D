@@ -371,7 +371,8 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLUseWasm: 0
   webGLCompressionFormat: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    4: StartButton
   platformArchitecture: {}
   scriptingBackend: {}
   incrementalIl2cppBuild: {}
