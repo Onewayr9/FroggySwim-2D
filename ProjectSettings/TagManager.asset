@@ -11,9 +11,9 @@ TagManager:
   - NextLevel
   - Death
   - Cactus
-  - MovingWall
   - Shell
   - Shield
+  - MovingWall
   layers:
   - Default
   - TransparentFX
