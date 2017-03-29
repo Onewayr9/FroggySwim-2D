@@ -9,13 +9,20 @@ public class PlayerController : MonoBehaviour {
 	public Text LevelText;
 	public Text ScoreText;
 	public Text HPText;
+	//
+	public GameObject shield;
+	private GameObject this_shield = null;
+	//
 
 	private Rigidbody2D rb2d;
 	private int HP = 100;
+	//
+	private int pickUpCount = 0;
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		LevelText.text = "Level " + (GameManager.instance.level + 1);
+		Debug.Log (GameManager.instance.level);
 		ScoreText.text = "Score: " + GameManager.instance.score;
 		HPText.text = "HP: " + HP;
 	}
@@ -37,12 +44,43 @@ public class PlayerController : MonoBehaviour {
 			GameManager.instance.score += 10;
 			HP += 10;
 			other.gameObject.SetActive (false);
+			//
+			pickUpCount++;
+//			Debug.Log ("player pick up");
+			if (pickUpCount >= 3) {
+//				Debug.Log("Shield being produced");
+				this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+
+				pickUpCount = 0;
+			}
 		} else if (other.tag == "Obstacle") {
-			HP -= 30;
+//			Debug.Log ("player obstacle");
+			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
+//				Debug.Log ("Shield being deactive");
+				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
+			} else {
+				HP -= 30;
+			}
+			pickUpCount = 0;
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
 		} else if (other.tag == "Death") {
 			HP = 0;
+			CheckIfGameOver ();
+		}  else if (other.tag == "Cactus") {
+//			Debug.Log ("Cactus");
+			HP -= 60;
+			other.gameObject.SetActive (false);
+			CheckIfGameOver ();
+		} else if (other.tag == "MovingWall") {
+//			Debug.Log ("Moving Wall");
+			HP -= 10;
+			other.gameObject.SetActive (false);
+			CheckIfGameOver ();
+		} else if (other.tag == "Shell") {
+			HP = 0;
+//			Debug.Log ("Shell");
+			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
 		}
 		ScoreText.text = "Score: " + GameManager.instance.score;
@@ -69,6 +107,14 @@ public class PlayerController : MonoBehaviour {
 	{
 		//Load the last scene loaded, in this case Main, the only scene in the game. And we load it in "Single" mode so it replace the existing one
 		//and not load all the scene object in the current scene.
+		BoardManager boardScript = GameManager.instance.getBoardManager();
+		if (GameManager.instance.level + 1 == boardScript.getTotalLevels()) {
+			Debug.Log (GameManager.instance.level + ": Cong!");
+//			Destroy (GameManager.instance);
+			SceneManager.LoadScene ("CongratulateScene", LoadSceneMode.Single);
+
+			return;
+		}
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
 	}
 
