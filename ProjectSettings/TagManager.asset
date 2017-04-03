@@ -10,6 +10,14 @@ TagManager:
   - Enemy
   - NextLevel
   - Death
+  - Shield
+  - MovingWall
+  - Cactus
+  - Shell
+  - Heart
+  - shield
+  - Transport
+  - HealthKit
   layers:
   - Default
   - TransparentFX

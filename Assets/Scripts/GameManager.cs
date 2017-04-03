@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
 	public float levelStartDelay = 2f;
+	public int maxNotLevelSceneIndex;
 
 	public int score = 0;
 
@@ -35,6 +36,11 @@ public class GameManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int index)
 	{
+		// 
+		if (index <= maxNotLevelSceneIndex) {
+			restart = true;
+			return;
+		}
 		if (restart) {
 			restart = false;
 			level = 0;
@@ -84,5 +90,13 @@ public class GameManager : MonoBehaviour {
 		levelImage.SetActive (false);
 		boardScript.SetupScene (level);
 		playerObject.SetActive (true);
+	}
+
+	public BoardManager getBoardManager() {
+		return boardScript;
+	}
+
+	public bool getRestart() {
+		return restart;
 	}
 }
