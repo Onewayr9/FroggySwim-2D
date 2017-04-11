@@ -14,6 +14,17 @@ public class PlayerController : MonoBehaviour {
 	private GameObject this_shield = null;
 	//
 
+	// sound effects
+	public AudioClip collectCoins;
+	public AudioClip death;
+	public AudioClip health;
+	public AudioClip obstacle;
+	public AudioClip healthKit;
+	public AudioClip shieldSound;
+
+	// sound source
+	private AudioSource source;
+
 	private Rigidbody2D rb2d;
 	private int HP = 100;
 	//
@@ -29,6 +40,9 @@ public class PlayerController : MonoBehaviour {
 		Debug.Log (GameManager.instance.level);
 		ScoreText.text = "Score: " + GameManager.instance.score;
 		HPText.text = "HP: " + HP;
+
+		// init sound source
+		source = GetComponent<AudioSource> ();
 	}
 
 	void OnCollisionStay2D(Collision2D collision) {
@@ -57,9 +71,11 @@ public class PlayerController : MonoBehaviour {
 //
 //				pickUpCount = 0;
 //			}
+			source.PlayOneShot(collectCoins, 1.0f);
 		} else if (other.tag == "HealthKit") {
 			HP += 10;
 			other.gameObject.SetActive (false);
+			source.PlayOneShot (healthKit, 1.0f);
 		} else if (other.tag == "Transport"){
 //			double xPosition = rb2d.transform.position.x;
 //			xPosition += 25;
@@ -69,6 +85,7 @@ public class PlayerController : MonoBehaviour {
 		} else if (other.tag == "Heart") {
 			HP += 15;
 			other.gameObject.SetActive (false);
+			source.PlayOneShot (health, 1.0f);
 		} else if (other.tag == "shield"){
 			pickUpCount++;
 			if (pickUpCount >= 1) {
@@ -77,9 +94,10 @@ public class PlayerController : MonoBehaviour {
 				pickUpCount = 0;
 			}
 			other.gameObject.SetActive (false);
-
+			source.PlayOneShot (shieldSound, 1.0f);
 		} else if (other.tag == "Obstacle") {
 //			Debug.Log ("player obstacle");
+			source.PlayOneShot(obstacle, 1.0f);
 			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
 //				Debug.Log ("Shield being deactive");
 				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
@@ -103,7 +121,12 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
 		} else if (other.tag == "Shell") {
-			HP = 0;
+//			HP = 0;
+			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
+				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
+			} else {
+				HP -= 45;
+			}
 //			Debug.Log ("Shell");
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
@@ -152,6 +175,7 @@ public class PlayerController : MonoBehaviour {
 		//Check if food point total is less than or equal to zero.
 		if (HP <= 0) 
 		{
+			source.PlayOneShot (death, 1.0f);
 			LevelText.text = "Game Over";
 			//Call the GameOver function of GameManager.
 			GameManager.instance.GameOver ();

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
 
 	[HideInInspector] public bool isGround = true;
 	[HideInInspector] public int level = 0;
+	[HideInInspector] public bool finish = false;
 
 	private bool restart = true;
 	private GameObject resumeButton;
@@ -43,7 +44,10 @@ public class GameManager : MonoBehaviour {
 		}
 		if (restart) {
 			restart = false;
-			level = 0;
+			if (finish) {
+				level = 0;
+				finish = false;
+			}
 			score = 0;
 		} else {
 			level++;

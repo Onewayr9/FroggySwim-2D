@@ -25,7 +25,7 @@ public class CannonTimer : MonoBehaviour {
 		string minutes = ((int)t / 60).ToString ();
 		string seconds = (t % 60).ToString ("f2");
 //		timerText.text = "Be A Man! Keep 8 seconds!" + minutes + ":" + seconds;
-		if (t >= 10.0f) {
+		if (t >= 20.0f) {
 //			timerText.text = "Congratulations! You Win!";
 			SceneManager.LoadScene ("CongratulateScene", LoadSceneMode.Single);
 		}
