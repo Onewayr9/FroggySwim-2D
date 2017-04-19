@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour {
 	private bool transport = false;
 	private double xPosition;
 
+	// new fetures
+	private bool hasKey = false;
+	private bool hasMushroom = false;
+	public GameObject bridge;
+
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -60,7 +65,7 @@ public class PlayerController : MonoBehaviour {
 			enabled = false;
 		} else if (other.tag == "Coin") {
 			GameManager.instance.score += 10;
-			HP += 10;
+			// HP += 10;
 			other.gameObject.SetActive (false);
 			//
 //			pickUpCount++;
@@ -71,12 +76,12 @@ public class PlayerController : MonoBehaviour {
 //
 //				pickUpCount = 0;
 //			}
-			source.PlayOneShot(collectCoins, 1.0f);
+			source.PlayOneShot (collectCoins, 1.0f);
 		} else if (other.tag == "HealthKit") {
 			HP += 10;
 			other.gameObject.SetActive (false);
 			source.PlayOneShot (healthKit, 1.0f);
-		} else if (other.tag == "Transport"){
+		} else if (other.tag == "Transport") {
 //			double xPosition = rb2d.transform.position.x;
 //			xPosition += 25;
 //			rb2d.transform.position.x = xPosition;
@@ -86,23 +91,23 @@ public class PlayerController : MonoBehaviour {
 			HP += 15;
 			other.gameObject.SetActive (false);
 			source.PlayOneShot (health, 1.0f);
-		} else if (other.tag == "shield"){
+		} else if (other.tag == "shield") {
 			pickUpCount++;
 			if (pickUpCount >= 1) {
 //				Debug.Log("Shield being produced");
-				this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+				this.gameObject.transform.GetChild (0).gameObject.SetActive (true);
 				pickUpCount = 0;
 			}
 			other.gameObject.SetActive (false);
 			source.PlayOneShot (shieldSound, 1.0f);
 		} else if (other.tag == "Obstacle") {
 //			Debug.Log ("player obstacle");
-			source.PlayOneShot(obstacle, 1.0f);
+			source.PlayOneShot (obstacle, 1.0f);
 			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
 //				Debug.Log ("Shield being deactive");
 				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
 			} else {
-				HP -= 30;
+				HP -= 60;
 			}
 			pickUpCount = 0;
 			other.gameObject.SetActive (false);
@@ -110,7 +115,7 @@ public class PlayerController : MonoBehaviour {
 		} else if (other.tag == "Death") {
 			HP = 0;
 			CheckIfGameOver ();
-		}  else if (other.tag == "Cactus") {
+		} else if (other.tag == "Cactus") {
 //			Debug.Log ("Cactus");
 			HP -= 60;
 			other.gameObject.SetActive (false);
@@ -130,6 +135,23 @@ public class PlayerController : MonoBehaviour {
 //			Debug.Log ("Shell");
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
+		} else if (other.tag == "key") {
+			hasKey = true;
+			other.gameObject.SetActive (false);
+		} else if (other.tag == "door") {
+			if (hasKey == false) {
+				HP = 0;
+			} else {
+				other.gameObject.SetActive (false);
+			}
+			CheckIfGameOver ();
+		} else if (other.tag == "Mushroom") {
+			hasMushroom = true;
+			other.gameObject.SetActive (false);
+//			// build bridge
+//			bridge = GameObject.Find("Bridge");
+//			Vector3 p = new Vector3 (21.26f, -4.33f, 0.0f);
+//			bridge.transform.position = p;
 		}
 		ScoreText.text = "Score: " + GameManager.instance.score;
 		HPText.text = "HP: " + HP;
@@ -145,13 +167,17 @@ public class PlayerController : MonoBehaviour {
 	#endif
 
 		if (GameManager.instance.isGround && isJump) {
-			rb2d.AddForce (new Vector2 (0, 900));
+			rb2d.AddForce (new Vector2 (0, 650));
 			GameManager.instance.isGround = false;
 		}
-//		if (transport) {
+		if (hasMushroom) {
+			// build bridge
+			bridge = GameObject.Find("Bridge");
+			bridge.transform.position = new Vector3 (bridge.transform.position.x, bridge.transform.position.y + 100, 0);
+			hasMushroom = false;
 //			rb2d.transform.position = new Vector3(rb2d.transform.position.x + 20, rb2d.transform.position.y, 0);
 //			transport = false;
-//		}
+		}
 	}
 
 	//Restart reloads the scene when called.

@@ -57,6 +57,7 @@ MonoBehaviour:
   score: 0
   isGround: 1
   level: 0
+  finish: 0
 --- !u!114 &114129377886021614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,11 +70,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
+  - {fileID: 1447219431173276, guid: 22d40fd4439a14112b671d5be24b07f3, type: 2}
   - {fileID: 1042980801395612, guid: 92b9fa44266984326afdf672b97e590c, type: 2}
   - {fileID: 1681134329149810, guid: 23b6c2f5335db4fff9d91a6dc2ca3132, type: 2}
   - {fileID: 1559918137845802, guid: 03610b7569eb34d6faebd7ddb88ea1f3, type: 2}
   - {fileID: 1725793737078686, guid: 3e0369a43a4fd40d3897d4722384e5e7, type: 2}
   backgrounds:
+  - {fileID: 1261548437669914, guid: 6f1ee3f4763964302a1369dadc3d9a80, type: 2}
   - {fileID: 1261548437669914, guid: 6f1ee3f4763964302a1369dadc3d9a80, type: 2}
   - {fileID: 1225446709002656, guid: 35dcc7f992ad048c5afb263d37d0b77f, type: 2}
   - {fileID: 1082091469735492, guid: b8aef2e4088eb4976a14fe47d7f48016, type: 2}

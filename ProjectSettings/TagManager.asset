@@ -18,6 +18,10 @@ TagManager:
   - shield
   - Transport
   - HealthKit
+  - key
+  - door
+  - Bridge
+  - Mushroom
   layers:
   - Default
   - TransparentFX
