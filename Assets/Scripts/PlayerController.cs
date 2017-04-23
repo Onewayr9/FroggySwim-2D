@@ -40,11 +40,15 @@ public class PlayerController : MonoBehaviour {
 	// new fetures
 	private bool hasKey = false;
 	private bool hasMushroom = false;
+<<<<<<< HEAD
 	private int keyNums = 0;
 	private bool hasMushroom1 = false;
 	public GameObject bridge;
 	public GameObject bridge1;
 
+=======
+	public GameObject bridge;
+>>>>>>> origin/xingye
 
 	// Use this for initialization
 	void Start () {
@@ -90,11 +94,19 @@ public class PlayerController : MonoBehaviour {
 //
 //				pickUpCount = 0;
 //			}
+<<<<<<< HEAD
 			source.PlayOneShot (collectCoins, 0.1f);
+=======
+			source.PlayOneShot (collectCoins, 1.0f);
+>>>>>>> origin/xingye
 		} else if (other.tag == "HealthKit") {
 			HP += 20;
 			other.gameObject.SetActive (false);
+<<<<<<< HEAD
 			source.PlayOneShot (healthKit, 0.1f);
+=======
+			source.PlayOneShot (healthKit, 1.0f);
+>>>>>>> origin/xingye
 		} else if (other.tag == "Transport") {
 //			double xPosition = rb2d.transform.position.x;
 //			xPosition += 25;
@@ -104,7 +116,11 @@ public class PlayerController : MonoBehaviour {
 		} else if (other.tag == "Heart") {
 			HP += 45;
 			other.gameObject.SetActive (false);
+<<<<<<< HEAD
 			source.PlayOneShot (health, 0.1f);
+=======
+			source.PlayOneShot (health, 1.0f);
+>>>>>>> origin/xingye
 		} else if (other.tag == "shield") {
 			pickUpCount++;
 			if (pickUpCount >= 1) {
@@ -116,12 +132,20 @@ public class PlayerController : MonoBehaviour {
 			source.PlayOneShot (shieldSound, 0.1f);
 		} else if (other.tag == "Obstacle") {
 //			Debug.Log ("player obstacle");
+<<<<<<< HEAD
 			source.PlayOneShot (obstacle, 0.1f);
+=======
+			source.PlayOneShot (obstacle, 1.0f);
+>>>>>>> origin/xingye
 			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
 //				Debug.Log ("Shield being deactive");
 				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
 			} else {
+<<<<<<< HEAD
 				HP -= 40;
+=======
+				HP -= 60;
+>>>>>>> origin/xingye
 			}
 			pickUpCount = 0;
 			other.gameObject.SetActive (false);
@@ -130,12 +154,17 @@ public class PlayerController : MonoBehaviour {
 			HP = 0;
 			CheckIfGameOver ();
 		} else if (other.tag == "Cactus") {
+<<<<<<< HEAD
 			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
 				//				Debug.Log ("Shield being deactive");
 				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
 			} else {
 				HP -= 50;
 			}
+=======
+//			Debug.Log ("Cactus");
+			HP -= 60;
+>>>>>>> origin/xingye
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
 		} else if (other.tag == "MovingWall") {
@@ -158,20 +187,28 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
 		} else if (other.tag == "key") {
+<<<<<<< HEAD
 			source.PlayOneShot (swordSound, 0.1f);
 			hasKey = true;
 			keyNums += 1;
+=======
+			hasKey = true;
+>>>>>>> origin/xingye
 			other.gameObject.SetActive (false);
 		} else if (other.tag == "door") {
 			if (hasKey == false) {
 				HP = 0;
 			} else {
+<<<<<<< HEAD
 				source.PlayOneShot (guardDeathSound, 0.1f);
 				hasKey = false;
+=======
+>>>>>>> origin/xingye
 				other.gameObject.SetActive (false);
 			}
 			CheckIfGameOver ();
 		} else if (other.tag == "Mushroom") {
+<<<<<<< HEAD
 			source.PlayOneShot (hammerSound, 0.1f);
 			hasMushroom = true;
 			other.gameObject.SetActive (false);
@@ -179,6 +216,14 @@ public class PlayerController : MonoBehaviour {
 			source.PlayOneShot (hammerSound, 0.1f);
 			hasMushroom1 = true;
 			other.gameObject.SetActive (false);
+=======
+			hasMushroom = true;
+			other.gameObject.SetActive (false);
+//			// build bridge
+//			bridge = GameObject.Find("Bridge");
+//			Vector3 p = new Vector3 (21.26f, -4.33f, 0.0f);
+//			bridge.transform.position = p;
+>>>>>>> origin/xingye
 		}
 		ScoreText.text = "Score: " + GameManager.instance.score;
 		HPText.text = "HP: " + HP;
@@ -195,7 +240,10 @@ public class PlayerController : MonoBehaviour {
 
 		if (GameManager.instance.isGround && isJump) {
 			rb2d.AddForce (new Vector2 (0, 650));
+<<<<<<< HEAD
 			source.PlayOneShot (jumpSound, 0.1f);
+=======
+>>>>>>> origin/xingye
 			GameManager.instance.isGround = false;
 		}
 		if (hasMushroom) {
@@ -206,6 +254,7 @@ public class PlayerController : MonoBehaviour {
 //			rb2d.transform.position = new Vector3(rb2d.transform.position.x + 20, rb2d.transform.position.y, 0);
 //			transport = false;
 		}
+<<<<<<< HEAD
 		if (hasMushroom1) {
 			// build bridge
 			bridge1 = GameObject.FindWithTag("Bridge1");
@@ -216,6 +265,8 @@ public class PlayerController : MonoBehaviour {
 			SceneManager.LoadScene ("CongratulateScene", LoadSceneMode.Single);
 			return;
 		}
+=======
+>>>>>>> origin/xingye
 	}
 
 	//Restart reloads the scene when called.

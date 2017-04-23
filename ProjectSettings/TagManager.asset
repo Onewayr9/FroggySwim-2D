@@ -22,8 +22,11 @@ TagManager:
   - door
   - Bridge
   - Mushroom
+<<<<<<< HEAD
   - Bridge1
   - Mushroom1
+=======
+>>>>>>> origin/xingye
   layers:
   - Default
   - TransparentFX
