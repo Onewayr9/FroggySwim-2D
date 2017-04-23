@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip obstacle;
 	public AudioClip healthKit;
 	public AudioClip shieldSound;
+	public AudioClip swordSound;
+	public AudioClip hammerSound;
+	public AudioClip guardDeathSound;
+	public AudioClip jumpSound;
 
 	// sound source
 	private AudioSource source;
@@ -33,10 +37,25 @@ public class PlayerController : MonoBehaviour {
 	private bool transport = false;
 	private double xPosition;
 
+	// new fetures
+	private bool hasKey = false;
+	private bool hasMushroom = false;
+	private int keyNums = 0;
+	private bool hasMushroom1 = false;
+	public GameObject bridge;
+	public GameObject bridge1;
+
+
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
-		LevelText.text = "Level " + (GameManager.instance.level + 1);
+		if (GameManager.instance.level == 4) {
+			LevelText.text = "Final Level";
+		} else if (GameManager.instance.level == 0){
+			LevelText.text = "Tutorial Level";
+		} else {
+			LevelText.text = "Level " + GameManager.instance.level;
+		}
 		Debug.Log (GameManager.instance.level);
 		ScoreText.text = "Score: " + GameManager.instance.score;
 		HPText.text = "HP: " + HP;
@@ -60,7 +79,7 @@ public class PlayerController : MonoBehaviour {
 			enabled = false;
 		} else if (other.tag == "Coin") {
 			GameManager.instance.score += 10;
-			HP += 10;
+			// HP += 10;
 			other.gameObject.SetActive (false);
 			//
 //			pickUpCount++;
@@ -71,38 +90,38 @@ public class PlayerController : MonoBehaviour {
 //
 //				pickUpCount = 0;
 //			}
-			source.PlayOneShot(collectCoins, 1.0f);
+			source.PlayOneShot (collectCoins, 0.1f);
 		} else if (other.tag == "HealthKit") {
-			HP += 10;
+			HP += 20;
 			other.gameObject.SetActive (false);
-			source.PlayOneShot (healthKit, 1.0f);
-		} else if (other.tag == "Transport"){
+			source.PlayOneShot (healthKit, 0.1f);
+		} else if (other.tag == "Transport") {
 //			double xPosition = rb2d.transform.position.x;
 //			xPosition += 25;
 //			rb2d.transform.position.x = xPosition;
 			transport = true;
 			other.gameObject.SetActive (false);
 		} else if (other.tag == "Heart") {
-			HP += 15;
+			HP += 45;
 			other.gameObject.SetActive (false);
-			source.PlayOneShot (health, 1.0f);
-		} else if (other.tag == "shield"){
+			source.PlayOneShot (health, 0.1f);
+		} else if (other.tag == "shield") {
 			pickUpCount++;
 			if (pickUpCount >= 1) {
 //				Debug.Log("Shield being produced");
-				this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+				this.gameObject.transform.GetChild (0).gameObject.SetActive (true);
 				pickUpCount = 0;
 			}
 			other.gameObject.SetActive (false);
-			source.PlayOneShot (shieldSound, 1.0f);
+			source.PlayOneShot (shieldSound, 0.1f);
 		} else if (other.tag == "Obstacle") {
 //			Debug.Log ("player obstacle");
-			source.PlayOneShot(obstacle, 1.0f);
+			source.PlayOneShot (obstacle, 0.1f);
 			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
 //				Debug.Log ("Shield being deactive");
 				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
 			} else {
-				HP -= 30;
+				HP -= 40;
 			}
 			pickUpCount = 0;
 			other.gameObject.SetActive (false);
@@ -110,14 +129,22 @@ public class PlayerController : MonoBehaviour {
 		} else if (other.tag == "Death") {
 			HP = 0;
 			CheckIfGameOver ();
-		}  else if (other.tag == "Cactus") {
-//			Debug.Log ("Cactus");
-			HP -= 60;
+		} else if (other.tag == "Cactus") {
+			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
+				//				Debug.Log ("Shield being deactive");
+				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
+			} else {
+				HP -= 50;
+			}
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
 		} else if (other.tag == "MovingWall") {
 //			Debug.Log ("Moving Wall");
-			HP -= 10;
+			if (this.gameObject.transform.GetChild (0).gameObject.activeSelf) {
+				this.gameObject.transform.GetChild (0).gameObject.SetActive (false);
+			} else {
+				HP -= 20;
+			}
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
 		} else if (other.tag == "Shell") {
@@ -130,6 +157,28 @@ public class PlayerController : MonoBehaviour {
 //			Debug.Log ("Shell");
 			other.gameObject.SetActive (false);
 			CheckIfGameOver ();
+		} else if (other.tag == "key") {
+			source.PlayOneShot (swordSound, 0.1f);
+			hasKey = true;
+			keyNums += 1;
+			other.gameObject.SetActive (false);
+		} else if (other.tag == "door") {
+			if (hasKey == false) {
+				HP = 0;
+			} else {
+				source.PlayOneShot (guardDeathSound, 0.1f);
+				hasKey = false;
+				other.gameObject.SetActive (false);
+			}
+			CheckIfGameOver ();
+		} else if (other.tag == "Mushroom") {
+			source.PlayOneShot (hammerSound, 0.1f);
+			hasMushroom = true;
+			other.gameObject.SetActive (false);
+		} else if (other.tag == "Mushroom1") {
+			source.PlayOneShot (hammerSound, 0.1f);
+			hasMushroom1 = true;
+			other.gameObject.SetActive (false);
 		}
 		ScoreText.text = "Score: " + GameManager.instance.score;
 		HPText.text = "HP: " + HP;
@@ -145,13 +194,28 @@ public class PlayerController : MonoBehaviour {
 	#endif
 
 		if (GameManager.instance.isGround && isJump) {
-			rb2d.AddForce (new Vector2 (0, 900));
+			rb2d.AddForce (new Vector2 (0, 650));
+			source.PlayOneShot (jumpSound, 0.1f);
 			GameManager.instance.isGround = false;
 		}
-//		if (transport) {
+		if (hasMushroom) {
+			// build bridge
+			bridge = GameObject.Find("Bridge");
+			bridge.transform.position = new Vector3 (bridge.transform.position.x, bridge.transform.position.y + 100, 0);
+			hasMushroom = false;
 //			rb2d.transform.position = new Vector3(rb2d.transform.position.x + 20, rb2d.transform.position.y, 0);
 //			transport = false;
-//		}
+		}
+		if (hasMushroom1) {
+			// build bridge
+			bridge1 = GameObject.FindWithTag("Bridge1");
+			bridge1.transform.position = new Vector3 (bridge1.transform.position.x, bridge1.transform.position.y + 100, 0);
+			hasMushroom1 = false;
+		}
+		if (keyNums >= 3 && GameManager.instance.level == 4) {
+			SceneManager.LoadScene ("CongratulateScene", LoadSceneMode.Single);
+			return;
+		}
 	}
 
 	//Restart reloads the scene when called.
@@ -175,7 +239,7 @@ public class PlayerController : MonoBehaviour {
 		//Check if food point total is less than or equal to zero.
 		if (HP <= 0) 
 		{
-			source.PlayOneShot (death, 1.0f);
+			source.PlayOneShot (death, 0.15f);
 			LevelText.text = "Game Over";
 			//Call the GameOver function of GameManager.
 			GameManager.instance.GameOver ();

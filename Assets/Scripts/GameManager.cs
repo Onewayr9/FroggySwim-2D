@@ -65,7 +65,16 @@ public class GameManager : MonoBehaviour {
 
 		levelImage = GameObject.Find("LevelImage");
 		levelText = GameObject.Find("LevelText").GetComponent<Text>();
-		levelText.text = "Level " + (level + 1);
+
+		//level title
+		if (level == 4) {
+			levelText.text = "Final Level";
+		} else if (level == 0){
+			levelText.text = "Tutorial Level";
+		} else {
+			levelText.text = "Level " + level;
+		}
+//		levelText.text = "Level " + (level + 1);
 		StartCoroutine(goAfterDelay());
 	}
 
