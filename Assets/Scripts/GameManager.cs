@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
 	public float levelStartDelay = 2f;
+	public int maxNotLevelSceneIndex;
 
 	public int score = 0;
 
 	[HideInInspector] public bool isGround = true;
 	[HideInInspector] public int level = 0;
+	[HideInInspector] public bool finish = false;
 
 	private bool restart = true;
 	private GameObject resumeButton;
@@ -35,9 +37,17 @@ public class GameManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int index)
 	{
+		// 
+		if (index <= maxNotLevelSceneIndex) {
+			restart = true;
+			return;
+		}
 		if (restart) {
 			restart = false;
-			level = 0;
+			if (finish) {
+				level = 0;
+				finish = false;
+			}
 			score = 0;
 		} else {
 			level++;
@@ -55,7 +65,16 @@ public class GameManager : MonoBehaviour {
 
 		levelImage = GameObject.Find("LevelImage");
 		levelText = GameObject.Find("LevelText").GetComponent<Text>();
-		levelText.text = "Level " + (level + 1);
+
+		//level title
+		if (level == 4) {
+			levelText.text = "Final Level";
+		} else if (level == 0){
+			levelText.text = "Tutorial Level";
+		} else {
+			levelText.text = "Level " + level;
+		}
+//		levelText.text = "Level " + (level + 1);
 		StartCoroutine(goAfterDelay());
 	}
 
@@ -84,5 +103,13 @@ public class GameManager : MonoBehaviour {
 		levelImage.SetActive (false);
 		boardScript.SetupScene (level);
 		playerObject.SetActive (true);
+	}
+
+	public BoardManager getBoardManager() {
+		return boardScript;
+	}
+
+	public bool getRestart() {
+		return restart;
 	}
 }

@@ -53,9 +53,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStartDelay: 2
+  maxNotLevelSceneIndex: 1
   score: 0
   isGround: 1
   level: 0
+  finish: 0
 --- !u!114 &114129377886021614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,8 +70,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 1109964824232072, guid: 07f484681c32e4e02ac7d15da19e8337, type: 2}
-  - {fileID: 1109964824232072, guid: 07f484681c32e4e02ac7d15da19e8337, type: 2}
+  - {fileID: 1413841249018626, guid: 8877e99285d3440989882e8d4e749123, type: 2}
+  - {fileID: 1847827890439060, guid: 71cf9e86af5c4418097c7b2ffbc760ed, type: 2}
+  - {fileID: 1777084744497500, guid: 84a99231956cf4039bb8c38122a05ecd, type: 2}
+  - {fileID: 1559918137845802, guid: 03610b7569eb34d6faebd7ddb88ea1f3, type: 2}
+  - {fileID: 1612032855161108, guid: 7f3fa40e008fe4f868192e127e96d12a, type: 2}
   backgrounds:
-  - {fileID: 1142425716764386, guid: 8d170102ef0d5460a869672dda666f4c, type: 2}
-  - {fileID: 1859209507743216, guid: 9e79c424931b84a3fa2273f66acd8586, type: 2}
+  - {fileID: 1727569709521076, guid: 7fc0aa81e383f4d6dabf49dd68f29230, type: 2}
+  - {fileID: 1261548437669914, guid: 6f1ee3f4763964302a1369dadc3d9a80, type: 2}
+  - {fileID: 1225446709002656, guid: 35dcc7f992ad048c5afb263d37d0b77f, type: 2}
+  - {fileID: 1082091469735492, guid: b8aef2e4088eb4976a14fe47d7f48016, type: 2}
+  - {fileID: 1353312674573812, guid: eb273e56f102b43b1bfc8352e3c4ba76, type: 2}

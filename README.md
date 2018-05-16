@@ -2,7 +2,7 @@
 ## TODOs:
 * ~add resume function when game over~
 * ~add start game button when entering game~
-* ~add a congraduation scene when player passed all the levels~
+* add a congraduation scene when player passed all the levels
 * make the game screen-adjustable
 * upgrade HP system
 * add boss at the end of each level

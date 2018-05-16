@@ -24,4 +24,8 @@ public class BoardManager : MonoBehaviour {
 			Instantiate (levels[level], new Vector3 (0, 0, 0), Quaternion.identity) as GameObject;
 		instance.transform.SetParent (boardHolder);
 	}
+
+	public int getTotalLevels() {
+		return levels.Length;
+	}
 }

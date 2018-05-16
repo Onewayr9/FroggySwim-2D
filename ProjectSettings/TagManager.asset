@@ -10,6 +10,20 @@ TagManager:
   - Enemy
   - NextLevel
   - Death
+  - Shield
+  - MovingWall
+  - Cactus
+  - Shell
+  - Heart
+  - shield
+  - Transport
+  - HealthKit
+  - key
+  - door
+  - Bridge
+  - Mushroom
+  - Bridge1
+  - Mushroom1
   layers:
   - Default
   - TransparentFX
@@ -19,7 +33,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Cannon
   - 
   - 
   - 
